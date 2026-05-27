@@ -43,7 +43,7 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-3">
             <a href="#objednavka" className="btn-primary">
-              Objednávka
+              Objednat korekturu
             </a>
             <a href="#cenik" className="btn-secondary">
               Ceník
