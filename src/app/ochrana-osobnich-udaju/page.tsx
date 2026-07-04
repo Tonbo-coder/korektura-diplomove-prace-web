@@ -69,7 +69,8 @@ export default function OchranaOsobnichUdajuPage() {
         </p>
         <ul>
           <li>dalším spolupracujícím subjektům nezbytným pro realizaci služby</li>
-          <li><strong>Cloudinary, Inc.</strong> (cloudinary.com) – služba pro dočasné uložení nahraných souborů (např. diplomové práce) v rámci zpracování objednávky. Soubory jsou uchovávány po dobu nezbytnou ke zpracování zakázky a následně smazány. Cloudinary splňuje standardy ISO 27001 a SOC 2.</li>
+          <li><strong>Vercel Inc.</strong> (vercel.com) – poskytovatel hostingu webu a úložiště nahraných souborů (Vercel Blob), ve kterém jsou dočasně uloženy soubory zaslané v rámci objednávky (např. diplomové práce). Soubory jsou uchovávány po dobu nezbytnou ke zpracování zakázky a automaticky mazány nejpozději po 14 dnech. Vercel splňuje standard SOC 2 Type 2.</li>
+          <li>poskytovateli e‑mailových služeb, jehož prostřednictvím probíhá e‑mailová komunikace související s objednávkou</li>
         </ul>
         <p>
           Tyto subjekty zpracovávají osobní údaje výhradně na základě pokynů správce a jsou vázány

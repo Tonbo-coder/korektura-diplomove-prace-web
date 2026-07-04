@@ -41,9 +41,10 @@ export default function OrderForm() {
   const [urgency, setUrgency] = useState<'expres' | 'smart' | 'custom'>('smart')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
-  const [debugMsg, setDebugMsg] = useState('')
+  const [progressMsg, setProgressMsg] = useState('')
   const [newsletter, setNewsletter] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const formLoadedAt = useRef(Date.now())
 
   const addFiles = (newFiles: FileList | null) => {
     if (!newFiles) return
@@ -87,7 +88,7 @@ export default function OrderForm() {
         const file = files[idx]
         if (file && file.size > 0) {
           try {
-            setDebugMsg(`Nahrávám soubor ${idx + 1}/${files.length}: ${file.name}...`)
+            setProgressMsg(`Nahrávám soubor ${idx + 1} z ${files.length}…`)
 
             const blob = await upload(
               `korektura-dp/${Date.now()}_${file.name}`,
@@ -99,15 +100,18 @@ export default function OrderForm() {
             )
 
             fileUrls.push(blob.url)
-            setDebugMsg(`Soubor ${idx + 1}/${files.length} nahrán.`)
           } catch (uploadErr) {
-            const msg = uploadErr instanceof Error ? uploadErr.message : String(uploadErr)
-            console.error('Upload souboru selhal:', msg)
-            setDebugMsg(`Chyba nahrávání ${file.name}: ${msg}`)
+            console.error('Upload souboru selhal:', uploadErr)
+            setStatus('error')
+            setErrorMsg(
+              `Nahrání souboru „${file.name}" se nezdařilo. Zkuste to prosím znovu, ` +
+                'případně nám práci pošlete e-mailem na info@korektura-diplomove-prace.cz.'
+            )
+            return
           }
         }
       }
-      setDebugMsg('Odesílám formulář...')
+      setProgressMsg('Odesílám objednávku…')
 
       // Odeslání dat formuláře jako JSON
       const payload = {
@@ -119,6 +123,8 @@ export default function OrderForm() {
         deadline: formData.get('deadline') ?? formData.get('urgency'),
         fileUrls,
         newsletterConsent: newsletter,
+        website: formData.get('website'),
+        elapsedMs: Date.now() - formLoadedAt.current,
       }
 
       const res = await fetch('/api/contact', {
@@ -126,13 +132,24 @@ export default function OrderForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-      const json = await res.json()
-      if (!res.ok) throw new Error(json.error ?? 'Chyba serveru')
+      if (!res.ok) {
+        const json = await res.json().catch(() => null)
+        setStatus('error')
+        setErrorMsg(
+          json?.error ??
+            'Odeslání se nezdařilo. Zkuste to prosím znovu nebo nám napište na info@korektura-diplomove-prace.cz.'
+        )
+        return
+      }
       setStatus('success')
       setTimeout(() => router.push('/dekujeme-za-objednavku'), 3000)
     } catch (err) {
+      console.error('Odeslání objednávky selhalo:', err)
       setStatus('error')
-      setErrorMsg(err instanceof Error ? err.message : 'Neznámá chyba')
+      setErrorMsg(
+        'Odeslání se nezdařilo. Zkontrolujte prosím připojení a zkuste to znovu, ' +
+          'případně nám napište na info@korektura-diplomove-prace.cz.'
+      )
     }
   }
 
@@ -161,6 +178,12 @@ export default function OrderForm() {
           {/* ── SEKCE 1: Kontaktní údaje ── */}
           <div>
             <SectionHeader num="1" title="Vaše kontaktní údaje" />
+
+            {/* Honeypot – skryté pole proti spam botům, lidé jej nevidí ani nevyplní */}
+            <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', height: 0, overflow: 'hidden' }}>
+              <label htmlFor="website">Web</label>
+              <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
               <div>
                 <label htmlFor="name" className={labelCls}>
@@ -198,11 +221,20 @@ export default function OrderForm() {
 
             {/* File drop zone */}
             <div
+              role="button"
+              tabIndex={0}
+              aria-label="Nahrát soubory – otevřít výběr souborů"
               onDrop={onDrop}
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
               onDragLeave={() => setIsDragging(false)}
               onClick={() => fileInputRef.current?.click()}
-              className={`border-2 border-dashed px-4 py-6 text-center cursor-pointer transition-colors duration-200 mb-4 ${
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  fileInputRef.current?.click()
+                }
+              }}
+              className={`border-2 border-dashed px-4 py-6 text-center cursor-pointer transition-colors duration-200 mb-4 focus:outline-none focus:ring-2 focus:ring-brand ${
                 isDragging
                   ? 'border-brand bg-brand/5'
                   : 'border-gray-300 hover:border-brand hover:bg-brand/5'
@@ -307,10 +339,10 @@ export default function OrderForm() {
               />
             )}
 
-            {/* Debug */}
-            {status === 'loading' && debugMsg && (
+            {/* Průběh odesílání */}
+            {status === 'loading' && progressMsg && (
               <div className="mb-4 bg-blue-50 border border-blue-300 text-blue-700 px-4 py-2 text-sm">
-                {debugMsg}
+                {progressMsg}
               </div>
             )}
 

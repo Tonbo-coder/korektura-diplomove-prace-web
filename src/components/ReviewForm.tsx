@@ -62,6 +62,12 @@ export default function ReviewForm() {
 
         <form onSubmit={handleSubmit} noValidate className="bg-white p-6 md:p-8 shadow-sm">
 
+            {/* Honeypot – skryté pole proti spam botům, lidé jej nevidí ani nevyplní */}
+            <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', height: 0, overflow: 'hidden' }}>
+              <label htmlFor="review-website">Web</label>
+              <input type="text" id="review-website" name="website" tabIndex={-1} autoComplete="off" />
+            </div>
+
             {/* 4-column grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
 

@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const thirtyDaysAgo = Date.now() - 14 * 24 * 60 * 60 * 1000
+  const fourteenDaysAgo = Date.now() - 14 * 24 * 60 * 60 * 1000
   let deleted = 0
 
   try {
@@ -26,7 +26,7 @@ export async function GET(request: Request) {
 
       for (const blob of result.blobs) {
         const uploadedAt = new Date(blob.uploadedAt).getTime()
-        if (uploadedAt < thirtyDaysAgo) {
+        if (uploadedAt < fourteenDaysAgo) {
           await del(blob.url, { token: process.env.BLOB_READ_WRITE_TOKEN })
           deleted++
         }

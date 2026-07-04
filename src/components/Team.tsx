@@ -44,7 +44,7 @@ export default function Team() {
     <section
       id="tym"
       style={{
-        backgroundImage: 'url(/images/2018/03/12/nas-tym-formatovani-bakalarske-prace.jpg)',
+        backgroundImage: 'url(/images/nas-tym-pozadi.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: '50% 40%',

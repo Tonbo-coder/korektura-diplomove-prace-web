@@ -21,7 +21,6 @@ function saveConsent(consent: 'accepted' | 'rejected' | 'custom', marketing: boo
   try {
     localStorage.setItem(LS_CONSENT,   consent)
     localStorage.setItem(LS_MARKETING, String(marketing))
-    console.log('[Cookies] cookie_consent =', consent, '| marketing_cookies =', String(marketing))
   } catch {
     // localStorage nedostupný
   }
@@ -41,11 +40,6 @@ function updateGoogleConsent(marketing: boolean) {
     ad_user_data:        status,
     ad_personalization:  status,
   })
-  console.log('[Cookies] Google Consent Mode updated → marketing:', status)
-}
-
-function loadMarketingScripts() {
-  console.log('[Cookies] Marketing scripts enabled.')
 }
 
 type View = 'banner' | 'settings' | 'hidden'
@@ -60,7 +54,6 @@ export default function CookieConsent() {
 
     if (alreadyDecided) {
       updateGoogleConsent(marketingValue)
-      if (marketingValue) loadMarketingScripts()
       setView('hidden')
     } else {
       setView('banner')
@@ -77,7 +70,6 @@ export default function CookieConsent() {
   const acceptAll = () => {
     saveConsent('accepted', true)
     updateGoogleConsent(true)
-    loadMarketingScripts()
     setMarketing(true)
     setView('hidden')
   }
@@ -92,7 +84,6 @@ export default function CookieConsent() {
   const saveSettings = () => {
     saveConsent('custom', marketing)
     updateGoogleConsent(marketing)
-    if (marketing) loadMarketingScripts()
     setView('hidden')
   }
 

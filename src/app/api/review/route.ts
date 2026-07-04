@@ -1,14 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
+import { escapeHtml, isSameOrigin } from '@/lib/api-utils'
 
 export async function POST(request: NextRequest) {
   try {
+    if (!isSameOrigin(request)) {
+      return NextResponse.json({ error: 'Neplatný požadavek.' }, { status: 403 })
+    }
+
     const formData = await request.formData()
 
-    const discovery = (formData.get('discovery') as string) ?? ''
-    const reasons = formData.getAll('reason') as string[]
-    const clarity = (formData.get('clarity') as string) ?? ''
-    const comment = (formData.get('comment') as string) ?? ''
+    // Honeypot – vyplněné pole = bot; odpovídáme úspěchem bez odeslání e-mailu
+    const website = (formData.get('website') as string) ?? ''
+    if (website.trim() !== '') {
+      return NextResponse.json({ success: true })
+    }
+
+    const discovery = escapeHtml(((formData.get('discovery') as string) ?? '').slice(0, 200))
+    const reasons = (formData.getAll('reason') as string[])
+      .slice(0, 10)
+      .map((r) => escapeHtml(String(r).slice(0, 200)))
+    const clarity = ((formData.get('clarity') as string) ?? '').replace(/[\r\n]/g, ' ').slice(0, 100)
+    const comment = escapeHtml(((formData.get('comment') as string) ?? '').slice(0, 5000))
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST ?? 'smtp.gmail.com',
@@ -25,28 +38,27 @@ export async function POST(request: NextRequest) {
       <table style="border-collapse:collapse;width:100%;max-width:600px;">
         <tr>
           <td style="padding:8px;font-weight:bold;background:#eef2f0;">Kde se dozvěděli o firmě</td>
-          <td style="padding:8px;">${discovery || '\u2013'}</td>
+          <td style="padding:8px;">${discovery || '–'}</td>
         </tr>
         <tr>
           <td style="padding:8px;font-weight:bold;background:#eef2f0;">Důvod výběru</td>
-          <td style="padding:8px;">${reasons.length ? reasons.join(', ') : '\u2013'}</td>
+          <td style="padding:8px;">${reasons.length ? reasons.join(', ') : '–'}</td>
         </tr>
         <tr>
           <td style="padding:8px;font-weight:bold;background:#eef2f0;">Přehlednost webu</td>
-          <td style="padding:8px;">${clarity || '\u2013'}</td>
+          <td style="padding:8px;">${escapeHtml(clarity) || '–'}</td>
         </tr>
         <tr>
           <td style="padding:8px;font-weight:bold;background:#eef2f0;">Komentář</td>
-          <td style="padding:8px;">${comment || '\u2013'}</td>
+          <td style="padding:8px;">${comment || '–'}</td>
         </tr>
       </table>
     `
 
     await transporter.sendMail({
-      from: `"Web Korektura DP \u2013 Hodnocení" <${process.env.EMAIL_FROM}>`,
+      from: `"Web Korektura DP – Hodnocení" <${process.env.EMAIL_FROM}>`,
       to: process.env.ORDER_TO_EMAIL || process.env.EMAIL_FROM,
-      replyTo: undefined,
-      subject: `Nové hodnocení \u2013 přehlednost: ${clarity || 'neuvedeno'}`,
+      subject: `Nové hodnocení – přehlednost: ${clarity || 'neuvedeno'}`,
       html: htmlBody,
     })
 
@@ -54,7 +66,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Review form error:', error)
     return NextResponse.json(
-      { error: 'Chyba při odeslání. Zkuste to prosím znovu nebo nás kontaktujte e\u2011mailem.' },
+      { error: 'Chyba při odeslání. Zkuste to prosím znovu nebo nás kontaktujte e‑mailem.' },
       { status: 500 }
     )
   }

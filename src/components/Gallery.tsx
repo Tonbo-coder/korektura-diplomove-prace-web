@@ -63,7 +63,7 @@ export default function Gallery() {
         className="py-20"
         style={{
           backgroundColor: '#0d1f2d',
-          backgroundImage: 'url(/images/2018/03/12/bubbles-formatovani-bakalarske-prace.png)',
+          backgroundImage: 'url(/images/pozadi-bubliny.png)',
           backgroundRepeat: 'repeat',
           backgroundSize: 'auto',
           backgroundAttachment: 'scroll',

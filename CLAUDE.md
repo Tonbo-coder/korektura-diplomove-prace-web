@@ -15,7 +15,7 @@ Komerční web pro služby korektur a formátování diplomových prací. Zákaz
 | File storage | Vercel Blob |
 | E-mail | Nodemailer + SMTP |
 | Analytika | Vercel Analytics, Google Tag Manager |
-| Obrázky | Cloudinary |
+| Obrázky | Lokální v `public/images` + next/image |
 
 ## Struktura projektu
 
@@ -32,7 +32,6 @@ src/
 │   └── api/
 │       ├── contact/route.ts            # Zpracování objednávky + odesílání e-mailů
 │       ├── blob-upload/route.ts        # Upload souborů do Vercel Blob
-│       ├── blob-token/route.ts         # Generování tokenů pro blob
 │       ├── review/route.ts             # Zpracování hodnocení
 │       └── cron/cleanup-blobs/route.ts # Automatické čištění starých souborů (14 dní)
 └── components/
@@ -93,5 +92,6 @@ npm run start  # spuštění produkčního buildu
 
 Vyžadované env proměnné (nikdy necommitovat):
 - `BLOB_READ_WRITE_TOKEN` — Vercel Blob
-- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` — e-mail
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS` — e-mail
 - `EMAIL_FROM`, `ORDER_TO_EMAIL` — e-mailové adresy
+- `CRON_SECRET` — autorizace cron jobu `/api/cron/cleanup-blobs`

@@ -1,5 +1,5 @@
 {
-  "name": "formatovani-diplomove-prace",
+  "name": "korektura-diplomove-prace",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,7 @@
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.3.1",
-    "cloudinary": "^2.5.1",
-    "next": "14.2.29",
+    "next": "^14.2.35",
     "nodemailer": "^6.9.16",
     "react": "^18",
     "react-dom": "^18"
