@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 import { escapeHtml, isSameOrigin } from '@/lib/api-utils'
+import { site } from '@/site.config'
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
     })
 
     const htmlBody = `
-      <h2>Nové hodnocení z korektura-diplomove-prace.cz</h2>
+      <h2>Nové hodnocení z ${site.domain}</h2>
       <table style="border-collapse:collapse;width:100%;max-width:600px;">
         <tr>
           <td style="padding:8px;font-weight:bold;background:#eef2f0;">Kde se dozvěděli o firmě</td>

@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import LegalLayout from '@/components/LegalLayout'
+import { site } from '@/site.config'
 
 export const metadata: Metadata = {
-  title: 'Ochrana osobních údajů – Korektura diplomové práce',
-  description: 'Zásady ochrany osobních údajů webu korektura-diplomove-prace.cz dle GDPR.',
+  title: `Ochrana osobních údajů – ${site.name}`,
+  description: `Zásady ochrany osobních údajů webu ${site.domain} dle GDPR.`,
   robots: { index: false, follow: false },
 }
 
@@ -15,9 +16,9 @@ export default function OchranaOsobnichUdajuPage() {
         <h2>Správce osobních údajů</h2>
         <p>Správcem osobních údajů jsou:</p>
         <p>
-          <strong>Prodocum, s.r.o.</strong>, IČO: 10745041, se sídlem Korunní 2569/108, 101 00 Praha<br />
+          <strong>{site.legal.company.name}</strong>, IČO: {site.legal.company.ico}, se sídlem {site.legal.company.address}<br />
           a<br />
-          <strong>Bc. Antonín Bouchal</strong>, IČO: 04484631, se sídlem Václavské náměstí 808/66, 110 00 Praha
+          <strong>{site.legal.owner.name}</strong>, IČO: {site.legal.owner.ico}, se sídlem {site.legal.owner.address}
         </p>
         <p>(dále jen „Správce").</p>
         <p>
@@ -109,8 +110,8 @@ export default function OchranaOsobnichUdajuPage() {
         <p>
           V případě dotazů týkajících se zpracování osobních údajů nás můžete kontaktovat na
           e‑mailové adrese:{' '}
-          <a href="mailto:info@korektura-diplomove-prace.cz">
-            info@korektura-diplomove-prace.cz
+          <a href={`mailto:${site.email}`}>
+            {site.email}
           </a>
         </p>
 

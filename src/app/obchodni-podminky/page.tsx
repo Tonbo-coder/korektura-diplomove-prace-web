@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import LegalLayout from '@/components/LegalLayout'
+import { site } from '@/site.config'
 
 export const metadata: Metadata = {
-  title: 'Obchodní podmínky – Korektura diplomové práce',
-  description: 'Obchodní podmínky pro využití služeb korektura-diplomove-prace.cz.',
+  title: `Obchodní podmínky – ${site.name}`,
+  description: `Obchodní podmínky pro využití služeb ${site.domain}.`,
   robots: { index: false, follow: false },
 }
 
@@ -15,9 +16,9 @@ export default function ObchodniPodminkyPage() {
         <h2>Úvodní ustanovení</h2>
         <p>Tyto obchodní podmínky upravují práva a povinnosti mezi:</p>
         <p>
-          <strong>Prodocum, s.r.o.</strong>, IČO: 10745041, se sídlem Korunní 2569/108, 101 00 Praha<br />
+          <strong>{site.legal.company.name}</strong>, IČO: {site.legal.company.ico}, se sídlem {site.legal.company.address}<br />
           a<br />
-          <strong>Bc. Antonín Bouchal</strong>, IČO: 04484631, se sídlem Václavské náměstí 808/66, 110 00 Praha
+          <strong>{site.legal.owner.name}</strong>, IČO: {site.legal.owner.ico}, se sídlem {site.legal.owner.address}
         </p>
         <p>(dále jen „Poskytovatel") a klientem (dále jen „Klient").</p>
 

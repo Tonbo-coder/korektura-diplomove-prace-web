@@ -1,3 +1,5 @@
+import { site } from '@/site.config'
+
 export default function ThankYouHero() {
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: '#0d1f2d' }}>
@@ -57,11 +59,11 @@ export default function ThankYouHero() {
         >
           Máte doplňující dotaz? Zavolejte nám nebo napište na{' '}
           <a
-            href="mailto:info@korektura-diplomove-prace.cz"
+            href={`mailto:${site.email}`}
             className="underline hover:text-white transition-colors"
             style={{ color: 'rgba(255,255,255,0.75)', textDecorationColor: '#1a7a68' }}
           >
-            info@korektura-diplomove-prace.cz
+            {site.email}
           </a>
         </p>
 

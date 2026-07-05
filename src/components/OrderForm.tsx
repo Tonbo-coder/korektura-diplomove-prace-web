@@ -3,6 +3,7 @@
 import { useState, useRef, DragEvent, ChangeEvent, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { upload } from '@vercel/blob/client'
+import { site } from '@/site.config'
 
 const SERVICE_GROUPS = [
   ['Korektura a stylistika', 'Bibliografické citace', 'Kontrola plagiátorství'],
@@ -105,7 +106,7 @@ export default function OrderForm() {
             setStatus('error')
             setErrorMsg(
               `Nahrání souboru „${file.name}" se nezdařilo. Zkuste to prosím znovu, ` +
-                'případně nám práci pošlete e-mailem na info@korektura-diplomove-prace.cz.'
+                `případně nám práci pošlete e-mailem na ${site.email}.`
             )
             return
           }
@@ -137,7 +138,7 @@ export default function OrderForm() {
         setStatus('error')
         setErrorMsg(
           json?.error ??
-            'Odeslání se nezdařilo. Zkuste to prosím znovu nebo nám napište na info@korektura-diplomove-prace.cz.'
+            `Odeslání se nezdařilo. Zkuste to prosím znovu nebo nám napište na ${site.email}.`
         )
         return
       }
@@ -148,7 +149,7 @@ export default function OrderForm() {
       setStatus('error')
       setErrorMsg(
         'Odeslání se nezdařilo. Zkontrolujte prosím připojení a zkuste to znovu, ' +
-          'případně nám napište na info@korektura-diplomove-prace.cz.'
+          `případně nám napište na ${site.email}.`
       )
     }
   }

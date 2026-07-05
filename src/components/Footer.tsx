@@ -1,4 +1,5 @@
 import CookieSettingsLink from '@/components/CookieSettingsLink'
+import { site } from '@/site.config'
 
 export default function Footer() {
   return (
@@ -18,7 +19,7 @@ export default function Footer() {
         </span>
         <div className="flex gap-4">
           <a
-            href="https://www.facebook.com/profiformatovani.cz"
+            href={site.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/70 hover:text-white transition-colors"
@@ -26,7 +27,7 @@ export default function Footer() {
             Facebook
           </a>
           <a
-            href="https://www.instagram.com/profiformatovani.cz/"
+            href={site.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/70 hover:text-white transition-colors"

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { site } from '@/site.config'
 
 const navLinks = [
   { href: '/#cenik', label: 'Ceník', title: 'Ceník korektury diplomové práce' },
@@ -69,11 +70,11 @@ export default function Navbar() {
       {/* Top contact bar */}
       <div className="bg-gray-dark hidden md:block">
         <div className="max-w-6xl mx-auto px-4 py-1.5 flex justify-end gap-6 text-sm" style={{ color: '#aaa' }}>
-          <a href="tel:+420736729646" className="hover:underline" style={{ color: '#aaa' }}>
-            <IconPhone />+420 736 729 646
+          <a href={`tel:${site.phone}`} className="hover:underline" style={{ color: '#aaa' }}>
+            <IconPhone />{site.phoneDisplay}
           </a>
-          <a href="mailto:info@korektura-diplomove-prace.cz" className="hover:underline" style={{ color: '#aaa' }}>
-            <IconMail />info@korektura-diplomove-prace.cz
+          <a href={`mailto:${site.email}`} className="hover:underline" style={{ color: '#aaa' }}>
+            <IconMail />{site.email}
           </a>
         </div>
       </div>

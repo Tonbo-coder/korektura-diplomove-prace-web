@@ -1,3 +1,5 @@
+import { site } from '@/site.config'
+
 const korrekturaOptions = [
   {
     name: 'Formátování Standard',
@@ -43,7 +45,7 @@ export default function Pricing() {
               className="text-white font-bold leading-none px-3 py-1 inline-block"
               style={{ backgroundColor: '#1a7a68', fontSize: '40px' }}
             >
-              75&nbsp;Kč
+              {site.pricing.mainService.price}&nbsp;Kč
             </div>
             <div className="text-white/70 text-sm mt-1 text-right">za&nbsp;normostranu</div>
           </div>

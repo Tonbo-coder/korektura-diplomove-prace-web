@@ -3,6 +3,7 @@ import { PT_Sans, Source_Sans_3 } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import CookieConsent from '@/components/CookieConsent'
+import { site } from '@/site.config'
 import './globals.css'
 
 const ptSans = PT_Sans({
@@ -23,11 +24,11 @@ export const metadata: Metadata = {
   title: 'Korektura diplomové práce | Jazyková a stylistická korektura',
   description:
     'Odborná korektura diplomové práce zaměřená na gramatiku, stylistiku i celkovou jazykovou úroveň textu. Spolehlivé zpracování, individuální přístup a návazné služby pro studenty vysokých škol.',
-  metadataBase: new URL('https://korektura-diplomove-prace.cz'),
+  metadataBase: new URL(site.url),
   alternates: {
-    canonical: 'https://korektura-diplomove-prace.cz/',
+    canonical: `${site.url}/`,
   },
-  authors: [{ name: 'Korektura-diplomove-prace.cz' }],
+  authors: [{ name: site.domain }],
   robots: {
     index: true,
     follow: true,
@@ -36,14 +37,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'cs_CZ',
-    url: 'https://korektura-diplomove-prace.cz/',
-    siteName: 'Korektura diplomové práce',
+    url: `${site.url}/`,
+    siteName: site.name,
     title: 'Korektura diplomové práce | Jazyková a stylistická korektura',
     description:
       'Odborná korektura diplomové práce zaměřená na gramatiku, stylistiku i celkovou jazykovou úroveň textu. Spolehlivé zpracování, individuální přístup a návazné služby pro studenty vysokých škol.',
     images: [
       {
-        url: 'https://korektura-diplomove-prace.cz/images/korektura-diplomove-prace.jpg',
+        url: `${site.url}/images/korektura-diplomove-prace.jpg`,
         width: 1200,
         height: 630,
         alt: 'Korektura diplomové práce',
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
     title: 'Korektura diplomové práce | Jazyková a stylistická korektura',
     description:
       'Odborná korektura diplomové práce zaměřená na gramatiku, stylistiku i celkovou jazykovou úroveň textu.',
-    images: ['https://korektura-diplomove-prace.cz/images/korektura-diplomove-prace.jpg'],
+    images: [`${site.url}/images/korektura-diplomove-prace.jpg`],
   },
   icons: {
     icon: [{ url: '/images/favicon.ico', type: 'image/x-icon' }],
@@ -71,52 +72,53 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': 'https://korektura-diplomove-prace.cz/#organization',
-      name: 'Korektura diplomové práce',
-      url: 'https://korektura-diplomove-prace.cz/',
-      email: 'info@korektura-diplomove-prace.cz',
-      telephone: '+420736729646',
-      logo: 'https://korektura-diplomove-prace.cz/images/logo-korektura-diplomove-prace.png',
+      '@id': `${site.url}/#organization`,
+      name: site.name,
+      url: `${site.url}/`,
+      email: site.email,
+      telephone: site.phone,
+      logo: `${site.url}/images/logo-korektura-diplomove-prace.png`,
+      sameAs: [site.social.facebook, site.social.instagram],
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Václavské náměstí 66/808',
-        addressLocality: 'Praha 1',
-        postalCode: '110 00',
-        addressCountry: 'CZ',
+        streetAddress: site.address.street,
+        addressLocality: site.address.city,
+        postalCode: site.address.zip,
+        addressCountry: site.address.country,
       },
     },
     {
       '@type': 'WebSite',
-      '@id': 'https://korektura-diplomove-prace.cz/#website',
-      name: 'Korektura diplomové práce',
-      url: 'https://korektura-diplomove-prace.cz/',
+      '@id': `${site.url}/#website`,
+      name: site.name,
+      url: `${site.url}/`,
       inLanguage: 'cs',
-      publisher: { '@id': 'https://korektura-diplomove-prace.cz/#organization' },
+      publisher: { '@id': `${site.url}/#organization` },
     },
     {
       '@type': 'WebPage',
-      '@id': 'https://korektura-diplomove-prace.cz/#webpage',
+      '@id': `${site.url}/#webpage`,
       name: 'Korektura diplomové práce | Jazyková a stylistická korektura',
-      url: 'https://korektura-diplomove-prace.cz/',
+      url: `${site.url}/`,
       description:
         'Jazyková a stylistická korektura diplomové práce pro studenty, kteří chtějí odevzdat text v profesionální a bezchybné podobě.',
       inLanguage: 'cs',
-      isPartOf: { '@id': 'https://korektura-diplomove-prace.cz/#website' },
+      isPartOf: { '@id': `${site.url}/#website` },
     },
     {
       '@type': 'Service',
-      '@id': 'https://korektura-diplomove-prace.cz/#service',
+      '@id': `${site.url}/#service`,
       name: 'Korektura diplomové práce',
       serviceType: 'Jazyková a stylistická korektura diplomových prací',
       areaServed: 'Czech Republic',
       availableLanguage: ['cs', 'sk'],
-      provider: { '@id': 'https://korektura-diplomove-prace.cz/#organization' },
+      provider: { '@id': `${site.url}/#organization` },
       offers: {
         '@type': 'Offer',
-        name: 'Korektura a stylistika',
-        price: '75',
-        priceCurrency: 'CZK',
-        unitText: 'normostrana',
+        name: site.pricing.mainService.name,
+        price: String(site.pricing.mainService.price),
+        priceCurrency: site.pricing.mainService.currency,
+        unitText: site.pricing.mainService.unit,
       },
     },
   ],
@@ -147,11 +149,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}</Script>
 
         <Script id="gtm" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KCT4VB4X');`}
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${site.gtmId}');`}
         </Script>
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-KCT4VB4X"
+            src={`https://www.googletagmanager.com/ns.html?id=${site.gtmId}`}
             height="0"
             width="0"
             style={{ display: 'none', visibility: 'hidden' }}

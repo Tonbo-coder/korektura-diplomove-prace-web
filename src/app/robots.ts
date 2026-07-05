@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { site } from '@/site.config'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://korektura-diplomove-prace.cz/sitemap.xml',
+    sitemap: `${site.url}/sitemap.xml`,
   }
 }

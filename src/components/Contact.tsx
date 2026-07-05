@@ -1,3 +1,5 @@
+import { site } from '@/site.config'
+
 function IconMail() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a7a68" strokeWidth="2"
@@ -37,26 +39,26 @@ function IconCompany() {
 const contactItems = [
   {
     Icon: IconMail,
-    label: 'info@korektura-diplomove-prace.cz',
-    href: 'mailto:info@korektura-diplomove-prace.cz',
+    label: site.email,
+    href: `mailto:${site.email}`,
     external: false,
   },
   {
     Icon: IconPhone,
-    label: '+420 736 729 646',
-    href: 'tel:+420736729646',
+    label: site.phoneDisplay,
+    href: `tel:${site.phone}`,
     external: false,
   },
   {
     Icon: IconLocation,
-    label: 'Václavské náměstí 66/808, Praha 1 – 110 00',
-    href: 'https://www.google.cz/maps/place/V%C3%A1clavsk%C3%A9+n%C3%A1m.+808%2F66,+110+00+Praha+1',
+    label: site.address.display,
+    href: site.address.mapsUrl,
     external: true,
   },
   {
     Icon: IconCompany,
-    label: 'IČO: 10745041',
-    href: 'https://or.justice.cz/ias/ui/rejstrik-firma.vysledky?subjektId=1118356&typ=UPLNY',
+    label: `IČO: ${site.legal.company.ico}`,
+    href: site.legal.registerUrl,
     external: true,
   },
 ]

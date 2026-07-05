@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 import { escapeHtml, isSameOrigin, isValidEmail, sanitizeBlobUrls } from '@/lib/api-utils'
+import { site } from '@/site.config'
 
 const MIN_SUBMIT_TIME_MS = 3000
 const MAX_FILES = 5
@@ -67,7 +68,7 @@ export async function POST(request: NextRequest) {
 
     // ── E-mail pro firmu (interní notifikace) ──
     const htmlBody = `
-      <h2>Nová objednávka z korektura-diplomove-prace.cz</h2>
+      <h2>Nová objednávka z ${site.domain}</h2>
       <table style="border-collapse:collapse;width:100%;max-width:600px;">
         <tr><td style="padding:8px;font-weight:bold;background:#eaf4f1;">Jméno</td><td style="padding:8px;">${safeName}</td></tr>
         <tr><td style="padding:8px;font-weight:bold;background:#eaf4f1;">Email</td><td style="padding:8px;"><a href="mailto:${safeEmail}">${safeEmail}</a></td></tr>
@@ -85,7 +86,7 @@ export async function POST(request: NextRequest) {
     const confirmHtml = `
       <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#333;">
         <div style="background:#0d1f2d;padding:24px 32px;">
-          <h1 style="color:#ffffff;font-size:20px;margin:0;">Korektura diplomové práce</h1>
+          <h1 style="color:#ffffff;font-size:20px;margin:0;">${site.name}</h1>
         </div>
         <div style="padding:32px;background:#ffffff;">
           <p style="font-size:16px;margin-top:0;">Dobrý den, <strong>${safeName}</strong>,</p>
@@ -108,12 +109,12 @@ export async function POST(request: NextRequest) {
             <li>Po Vašem odsouhlasení zahájíme korekturu.</li>
           </ol>
 
-          <p>Pokud máte jakékoliv dotazy, neváhejte nám odpovědět na tento e‑mail nebo nás kontaktujte na <a href="mailto:info@korektura-diplomove-prace.cz" style="color:#1a7a68;">info@korektura-diplomove-prace.cz</a>.</p>
+          <p>Pokud máte jakékoliv dotazy, neváhejte nám odpovědět na tento e‑mail nebo nás kontaktujte na <a href="mailto:${site.email}" style="color:#1a7a68;">${site.email}</a>.</p>
 
-          <p style="margin-top:24px;">S pozdravem,<br><strong>Tým Korektura diplomové práce</strong></p>
+          <p style="margin-top:24px;">S pozdravem,<br><strong>Tým ${site.name}</strong></p>
         </div>
         <div style="background:#f5f5f5;padding:16px 32px;font-size:12px;color:#999;text-align:center;">
-          <p style="margin:0;">&copy; 2026 korektura-diplomove-prace.cz | <a href="https://korektura-diplomove-prace.cz/ochrana-osobnich-udaju" style="color:#999;">Ochrana osobních údajů</a></p>
+          <p style="margin:0;">&copy; 2026 ${site.domain} | <a href="${site.url}/ochrana-osobnich-udaju" style="color:#999;">Ochrana osobních údajů</a></p>
         </div>
       </div>
     `
@@ -130,9 +131,9 @@ export async function POST(request: NextRequest) {
       }),
       // 2) Potvrzení zákazníkovi
       transporter.sendMail({
-        from: `"Korektura diplomové práce" <${process.env.EMAIL_FROM}>`,
+        from: `"${site.name}" <${process.env.EMAIL_FROM}>`,
         to: email,
-        subject: 'Potvrzení objednávky – Korektura diplomové práce',
+        subject: `Potvrzení objednávky – ${site.name}`,
         html: confirmHtml,
       }),
     ])
