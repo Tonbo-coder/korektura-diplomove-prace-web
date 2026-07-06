@@ -254,7 +254,7 @@ export default function OrderForm() {
                 <span className="text-brand font-semibold">vyberte v počítači</span>
               </p>
               <p className="text-xs text-gray-400 mt-0.5">
-                PDF, DOC, DOCX, RTF, ODT, TXT, XLS, XLSX, JPG, PNG, ZIP &ndash; max. {MAX_FILES} souborů, každý do 25 MB
+                Max. {MAX_FILES} souborů, každý do 25 MB
               </p>
             </div>
 

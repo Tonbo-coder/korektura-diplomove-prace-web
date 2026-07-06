@@ -83,7 +83,7 @@ export default function Navbar() {
       <nav className={`sticky top-0 z-50 bg-bg-light border-b border-gray-200 transition-shadow duration-300 ${scrolled ? 'shadow-md' : ''}`}>
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
+          <a href="/" className="flex-shrink-0" aria-label="Znovu načíst úvodní stránku">
             <Image
               src="/images/logo-korektura-diplomove-prace.png"
               alt="Korektura diplomové práce – logo"
@@ -91,7 +91,7 @@ export default function Navbar() {
               height={36}
               priority
             />
-          </Link>
+          </a>
 
           {/* Desktop menu */}
           <ul className="hidden lg:flex items-center gap-1">

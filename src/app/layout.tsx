@@ -3,6 +3,7 @@ import { PT_Sans, Source_Sans_3 } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import CookieConsent from '@/components/CookieConsent'
+import ScrollToTop from '@/components/ScrollToTop'
 import { site } from '@/site.config'
 import './globals.css'
 
@@ -160,6 +161,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
         {children}
+        <ScrollToTop />
         <CookieConsent />
         <Analytics />
       </body>
