@@ -38,7 +38,7 @@ export default function Pricing() {
           style={{ backgroundColor: '#0d1f2d' }}
         >
           <h3 className="text-white font-headings font-normal text-3xl md:text-4xl leading-snug text-left">
-            <strong>Korektura</strong> a&nbsp;stylistika
+            <strong>Korektura</strong>&nbsp;a&nbsp;stylistika
           </h3>
           <div className="flex-shrink-0 text-right">
             <div
