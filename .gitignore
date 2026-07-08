@@ -30,3 +30,6 @@ Thumbs.db
 
 # typescript
 tsconfig.tsbuildinfo
+
+# local analysis artifacts
+GEO-ANALYSIS.md
