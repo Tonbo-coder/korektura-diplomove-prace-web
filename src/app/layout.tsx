@@ -72,13 +72,15 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Organization',
+      '@type': 'ProfessionalService',
       '@id': `${site.url}/#organization`,
       name: site.name,
       url: `${site.url}/`,
       email: site.email,
       telephone: site.phone,
       logo: `${site.url}/images/logo-korektura-diplomove-prace.png`,
+      image: `${site.url}/images/korektura-diplomove-prace.jpg`,
+      priceRange: '40–75 Kč za normostranu',
       sameAs: [site.social.facebook, site.social.instagram],
       address: {
         '@type': 'PostalAddress',
@@ -86,6 +88,65 @@ const jsonLd = {
         addressLocality: site.address.city,
         postalCode: site.address.zip,
         addressCountry: site.address.country,
+      },
+      areaServed: ['CZ', 'SK'],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        email: site.email,
+        telephone: site.phone,
+        availableLanguage: ['cs', 'sk'],
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Služby pro diplomové práce',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Korektura a stylistika diplomové práce' },
+            price: String(site.pricing.mainService.price),
+            priceCurrency: 'CZK',
+          },
+          {
+            '@type': 'AggregateOffer',
+            itemOffered: { '@type': 'Service', name: 'Formátování diplomové práce' },
+            lowPrice: '40',
+            highPrice: '50',
+            priceCurrency: 'CZK',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Kontrola plagiátorství' },
+            price: '390',
+            priceCurrency: 'CZK',
+          },
+          {
+            '@type': 'AggregateOffer',
+            itemOffered: { '@type': 'Service', name: 'Překlad abstraktu do angličtiny nebo němčiny' },
+            lowPrice: '490',
+            highPrice: '590',
+            priceCurrency: 'CZK',
+          },
+          {
+            '@type': 'AggregateOffer',
+            itemOffered: { '@type': 'Service', name: 'Tisk a vazba diplomové práce' },
+            lowPrice: '950',
+            highPrice: '1050',
+            priceCurrency: 'CZK',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Písemné doporučení k diplomové práci' },
+            price: '1500',
+            priceCurrency: 'CZK',
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: { '@type': 'Service', name: 'Tvorba prezentace k obhajobě' },
+            price: '2500',
+            priceCurrency: 'CZK',
+          },
+        ],
       },
     },
     {

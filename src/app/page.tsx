@@ -7,6 +7,7 @@ import Process from '@/components/Process'
 import Testimonials from '@/components/Testimonials'
 import Gallery from '@/components/Gallery'
 import Team from '@/components/Team'
+import Faq from '@/components/Faq'
 import OrderForm from '@/components/OrderForm'
 import Universities from '@/components/Universities'
 import Contact from '@/components/Contact'
@@ -25,6 +26,7 @@ export default function HomePage() {
       <Gallery />
       <Team />
       <OrderForm />
+      <Faq />
       <Universities />
       <Contact />
       <Footer />
