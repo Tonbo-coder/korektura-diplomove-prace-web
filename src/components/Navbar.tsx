@@ -153,9 +153,9 @@ export default function Navbar() {
           <div className="relative ml-auto w-72 h-full bg-white shadow-xl flex flex-col">
             <div className="flex items-center justify-between p-4 bg-navy">
               <Image
-                src="/images/logo-korektura-diplomove-prace-small.png"
+                src="/images/logo-korektura-diplomove-color-negative.svg"
                 alt="Logo"
-                width={140}
+                width={128}
                 height={30}
               />
               <button onClick={closeMenu} className="text-white text-2xl leading-none p-1 focus:outline-none" aria-label="Zavřít menu">
