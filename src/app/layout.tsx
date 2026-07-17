@@ -60,7 +60,11 @@ export const metadata: Metadata = {
     images: [`${site.url}/images/korektura-diplomove-prace.jpg`],
   },
   icons: {
-    icon: [{ url: '/images/favicon.ico', type: 'image/x-icon' }],
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   other: {
     'format-detection': 'telephone=no',

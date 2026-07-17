@@ -85,10 +85,10 @@ export default function Navbar() {
           {/* Logo */}
           <a href="/" className="flex-shrink-0" aria-label="Znovu načíst úvodní stránku">
             <Image
-              src="/images/logo-korektura-diplomove-prace.png"
+              src="/images/logo-korektura-diplomove-color-positive.svg"
               alt="Korektura diplomové práce – logo"
-              width={173}
-              height={36}
+              width={179}
+              height={42}
               priority
             />
           </a>
