@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
 import TrustBar from '@/components/TrustBar'
@@ -12,6 +13,12 @@ import OrderForm from '@/components/OrderForm'
 import Universities from '@/components/Universities'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+}
 
 export default function HomePage() {
   return (

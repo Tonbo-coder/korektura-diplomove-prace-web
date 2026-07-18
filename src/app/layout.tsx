@@ -26,9 +26,6 @@ export const metadata: Metadata = {
   description:
     'Odborná korektura diplomové práce zaměřená na gramatiku, stylistiku i celkovou jazykovou úroveň textu. Spolehlivé zpracování, individuální přístup a návazné služby pro studenty vysokých škol.',
   metadataBase: new URL(site.url),
-  alternates: {
-    canonical: `${site.url}/`,
-  },
   authors: [{ name: site.domain }],
   robots: {
     index: true,
