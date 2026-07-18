@@ -6,7 +6,7 @@ import { upload } from '@vercel/blob/client'
 import { site } from '@/site.config'
 
 const SERVICE_GROUPS = [
-  ['Korektura a stylistika', 'Bibliografické citace', 'Kontrola plagiátorství'],
+  ['Formátování', 'Bibliografické citace', 'Kontrola plagiátorství'],
   ['Překlad abstraktu', 'Tisk a vazba práce', 'Tvorba prezentace'],
   ['Analýza využití AI', 'Písemné doporučení'],
 ]
