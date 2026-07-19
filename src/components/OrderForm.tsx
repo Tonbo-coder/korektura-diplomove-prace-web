@@ -39,7 +39,7 @@ export default function OrderForm() {
   const router = useRouter()
   const [files, setFiles] = useState<File[]>([])
   const [isDragging, setIsDragging] = useState(false)
-  const [urgency, setUrgency] = useState<'expres' | 'smart' | 'custom'>('smart')
+  const [urgency, setUrgency] = useState<'standard' | 'smart' | 'express' | 'custom'>('smart')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [progressMsg, setProgressMsg] = useState('')
@@ -296,8 +296,9 @@ export default function OrderForm() {
             {/* Radio tiles */}
             <div className="flex flex-col sm:flex-row gap-3 mb-4">
               {[
-                { id: 'expres' as const, label: 'Expres', note: 'do 24 hodin' },
-                { id: 'smart'  as const, label: 'Smart',  note: 'do 2 dnů'    },
+                { id: 'standard' as const, label: 'Standard', note: 'do 4 dnů' },
+                { id: 'smart' as const, label: 'Smart', note: 'do 2 dnů' },
+                { id: 'express' as const, label: 'Express', note: 'do 24 hodin' },
                 { id: 'custom' as const, label: 'Vlastní datum', note: 'zvolím sám/a' },
               ].map((o) => (
                 <label
