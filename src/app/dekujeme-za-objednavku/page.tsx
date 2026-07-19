@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import ThankYouHero from '@/components/ThankYouHero'
-import TrustBar from '@/components/TrustBar'
 import ReviewForm from '@/components/ReviewForm'
 import Universities from '@/components/Universities'
 import Contact from '@/components/Contact'
@@ -22,7 +21,6 @@ export default function ThankYouPage() {
     <>
       <Navbar />
       <ThankYouHero />
-      <TrustBar />
       <ReviewForm />
       <Universities />
       <Contact />

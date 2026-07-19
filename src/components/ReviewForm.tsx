@@ -158,6 +158,12 @@ export default function ReviewForm() {
             </div>
 
           </form>
+
+          <div className="flex justify-center mt-10">
+            <a href="/" className="btn-secondary">
+              Zpět na hlavní stránku
+            </a>
+          </div>
       </div>
     </section>
   )

@@ -54,22 +54,18 @@ export default function ThankYouHero() {
           době se vám ozveme s cenovou nabídkou a potvrzením termínu.
         </p>
         <p
-          className="text-base leading-relaxed max-w-lg mx-auto mb-10"
+          className="text-base leading-relaxed max-w-lg mx-auto"
           style={{ color: 'rgba(255,255,255,0.55)' }}
         >
           Máte doplňující dotaz? Zavolejte nám nebo napište na{' '}
           <a
             href={`mailto:${site.email}`}
-            className="underline hover:text-white transition-colors"
+            className="underline hover:text-white transition-colors whitespace-nowrap"
             style={{ color: 'rgba(255,255,255,0.75)', textDecorationColor: '#1a7a68' }}
           >
             {site.email}
           </a>
         </p>
-
-        <a href="/" className="btn-secondary-outline-white">
-          Zpět na hlavní stránku
-        </a>
       </div>
     </section>
   )
