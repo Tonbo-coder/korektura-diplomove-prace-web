@@ -260,20 +260,32 @@ export default function OrderForm() {
 
             {/* File list */}
             {files.length > 0 && (
-              <ul className="mb-4 space-y-1">
-                {files.map((f, i) => (
-                  <li key={i} className="flex justify-between bg-gray-50 px-3 py-1.5 text-xs text-gray-600">
-                    <span className="truncate">{f.name}</span>
-                    <button
-                      type="button"
-                      onClick={() => removeFile(i)}
-                      className="ml-2 text-gray-400 hover:text-red-500 font-bold flex-shrink-0"
-                    >
-                      &times;
-                    </button>
-                  </li>
-                ))}
-              </ul>
+              <div className="mb-4">
+                <p className="text-xs font-bold uppercase tracking-wide text-green-700 mb-1.5">
+                  Přidané soubory ({files.length})
+                </p>
+                <ul className="space-y-1.5">
+                  {files.map((f, i) => (
+                    <li key={i} className="flex items-center gap-2.5 bg-green-50 border border-green-300 px-3 py-2.5 text-sm">
+                      <svg className="w-5 h-5 flex-shrink-0 text-green-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="truncate font-semibold text-green-800">{f.name}</span>
+                      <span className="text-xs text-green-700/70 flex-shrink-0">
+                        {f.size < 1048576 ? `${Math.max(1, Math.round(f.size / 1024))} kB` : `${(f.size / 1048576).toFixed(1)} MB`}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeFile(i)}
+                        aria-label={`Odebrat soubor ${f.name}`}
+                        className="ml-auto text-green-700 hover:text-red-600 font-bold text-lg leading-none flex-shrink-0"
+                      >
+                        &times;
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
 
             {/* Chci také */}
