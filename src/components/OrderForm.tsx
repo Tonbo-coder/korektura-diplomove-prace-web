@@ -190,21 +190,21 @@ export default function OrderForm() {
                 <label htmlFor="name" className={labelCls}>
                   Jméno <span className="text-brand">*</span>
                 </label>
-                <input type="text" id="name" name="name" required
+                <input type="text" id="name" name="name" autoComplete="name" required
                   placeholder="Celé jméno" className={inputCls} />
               </div>
               <div>
                 <label htmlFor="email" className={labelCls}>
                   E&#x2011;mail <span className="text-brand">*</span>
                 </label>
-                <input type="email" id="email" name="email" required
+                <input type="email" id="email" name="email" autoComplete="email" required
                   placeholder="e&#x2011;mailová adresa" className={inputCls} />
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label htmlFor="phone" className={labelCls}>Telefon</label>
-                <input type="tel" id="phone" name="phone"
+                <input type="tel" id="phone" name="phone" autoComplete="tel"
                   placeholder="+420 xxx xxx xxx" className={inputCls} />
               </div>
               <div>
