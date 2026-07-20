@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import ReviewThankYouBlock from '@/components/ReviewThankYouBlock'
-import TrustBar from '@/components/TrustBar'
 import Universities from '@/components/Universities'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
@@ -21,7 +20,6 @@ export default function ReviewThankYouPage() {
     <>
       <Navbar />
       <ReviewThankYouBlock />
-      <TrustBar />
       <Universities />
       <Contact />
       <Footer />
