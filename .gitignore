@@ -33,3 +33,6 @@ tsconfig.tsbuildinfo
 
 # local analysis artifacts
 GEO-ANALYSIS.md
+
+# generovany soubor Next.js (prepina se mezi dev/build)
+next-env.d.ts
